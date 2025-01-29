@@ -11,14 +11,16 @@ public class PlayerMovement : MonoBehaviour
     public KeyCode jumpKey = KeyCode.Space;
 
     [Header("Attack")]
-    bool canMove = true;
     public float attackCooldown = 1f;
+    public float airAttackCooldown= .3f;
     public float attackDmg = 1f;
     float leftRight;
+    MoveListDoer moveList;
+    public bool canMove = true;
 
     public KeyCode attackKey = KeyCode.LeftShift;
 
-    public float playerHight;
+    [Header("Other")]
     public LayerMask ground;
     public bool grounded;
 
@@ -31,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         cc = GetComponent<CharacterController>();
+        moveList = GetComponent<MoveListDoer>();
     }
 
     // Update is called once per frame
@@ -57,11 +60,10 @@ public class PlayerMovement : MonoBehaviour
             Jump();
             Invoke(nameof(resetJump), jumpCooldown);
         }
-        if (Input.GetKeyDown(attackKey) && canMove)
+        if (Input.GetKeyDown(attackKey) && canMove && readyToJump)
         {
             canMove = false;
             AttackLogic();
-            Invoke(nameof(AttackCooldown), attackCooldown);
         }
         
     }
@@ -83,10 +85,14 @@ public class PlayerMovement : MonoBehaviour
             if(leftRight > 0)
             {
                 Debug.Log("Ground attack right");
+                moveList.RightNormal();
+                Invoke(nameof(AttackCooldown), attackCooldown);
             }
             else if(leftRight < 0) 
             {
                 Debug.Log("Ground attack left");
+                moveList.LeftNormal();
+                Invoke(nameof(AttackCooldown), attackCooldown);
             }
         }
         else
@@ -94,10 +100,14 @@ public class PlayerMovement : MonoBehaviour
             if (leftRight > 0)
             {
                 Debug.Log("Air attack right");
+                moveList.RightAir();
+                Invoke(nameof(AttackCooldown), airAttackCooldown);
             }
             else if (leftRight < 0)
             {
                 Debug.Log("Air attack left");
+                moveList.LeftAir();
+                Invoke(nameof(AttackCooldown), airAttackCooldown);
             }
         }
     }

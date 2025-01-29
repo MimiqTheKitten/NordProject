@@ -2,14 +2,23 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] float health = 5;
+    [SerializeField] int health = 150;
+    [SerializeField] WinController wc;
 
-    private void OnCollisionEnter(Collision other)
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [System.Obsolete]
+    private void Start()
     {
-        if(other.gameObject.tag == "bullet")
+        wc = FindFirstObjectByType<WinController>();
+    }
+
+    public void Damaged(int damage)
+    {
+        health -= damage;
+        if(health <= 0)
         {
-            Destroy(other.gameObject);
-            Debug.Log("hit by bullet");
+            wc.Lose(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }
