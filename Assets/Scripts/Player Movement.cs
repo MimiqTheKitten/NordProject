@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     bool canMove = true;
     public float attackCooldown = 1f;
     public float attackDmg = 1f;
+    float leftRight;
 
     public KeyCode attackKey = KeyCode.LeftShift;
 
@@ -45,6 +46,10 @@ public class PlayerMovement : MonoBehaviour
     void MyInput()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
+        if (!(horizontalInput == 0))
+        {
+            leftRight = horizontalInput; //-1 is left, 1 is right
+        }
         grounded = Grounded();
         if (Input.GetKey(jumpKey) && canMove && readyToJump && grounded)
         {
@@ -75,11 +80,25 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Grounded())
         {
-            Debug.Log("Ground attack");
+            if(leftRight > 0)
+            {
+                Debug.Log("Ground attack right");
+            }
+            else if(leftRight < 0) 
+            {
+                Debug.Log("Ground attack left");
+            }
         }
         else
         {
-            Debug.Log("Air attack");
+            if (leftRight > 0)
+            {
+                Debug.Log("Air attack right");
+            }
+            else if (leftRight < 0)
+            {
+                Debug.Log("Air attack left");
+            }
         }
     }
     void AttackCooldown()
