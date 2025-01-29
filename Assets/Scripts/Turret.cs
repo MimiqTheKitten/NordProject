@@ -1,3 +1,5 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations;
 
@@ -23,6 +25,9 @@ public class Turret : MonoBehaviour
 
     [Header("Current action")]
     [SerializeField] string action = "lookaround";
+    [SerializeField] float maxviewDistance = 10;
+    [SerializeField] LayerMask targetLayer;
+    [SerializeField] LayerMask obstacleLayer;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -32,6 +37,7 @@ public class Turret : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.DrawLine(transform.position, transform.forward, Color.red, maxviewDistance);
         switch (action) 
         {
             case "lookaround":
@@ -44,6 +50,10 @@ public class Turret : MonoBehaviour
                     shouldFire = false;
                     Invoke(nameof(Shoot), fireRate);
                 }
+                if (!Eyes())
+                {
+                    action = "lookaround";
+                }
                 break;
             default:
                 break;
@@ -55,6 +65,10 @@ public class Turret : MonoBehaviour
         currentRotation = headRotation.Evaluate(timeTurretOn)*maxYRotation;
         Quaternion targetRotation = Quaternion.Euler(new Vector3(defaultXTilt,currentRotation +offsetYRotation,0));
         transform.rotation = targetRotation;
+        if (Eyes())
+        {
+            action = "lookat";
+        }
     }
     void LookAt()
     {
@@ -66,5 +80,13 @@ public class Turret : MonoBehaviour
         bullet.GetComponent<Rigidbody>().linearVelocity = bullet.transform.forward * bulletSpeed;
         shouldFire = true;
         Destroy(bullet, bulletLife);
+    }
+    bool Eyes()
+    {
+        if(!Physics.Raycast(transform.position,transform.forward,maxviewDistance, obstacleLayer))
+        {
+            return Physics.Raycast(transform.position, transform.forward, maxviewDistance, targetLayer);
+        }
+        return false;
     }
 }
