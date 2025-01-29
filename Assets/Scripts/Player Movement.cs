@@ -10,6 +10,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpRayDistance = 10;
     public KeyCode jumpKey = KeyCode.Space;
 
+    [Header("Attack")]
+    bool canMove = true;
+    public float attackCooldown = 1f;
+    public float attackDmg = 1f;
+
+    public KeyCode attackKey = KeyCode.LeftShift;
+
     public float playerHight;
     public LayerMask ground;
     public bool grounded;
@@ -29,20 +36,29 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         MyInput();
-        transform.Translate(Vector3.right * horizontalInput * moveSpeed * Time.deltaTime);
+        if (canMove)
+        {
+            transform.Translate(Vector3.right * horizontalInput * moveSpeed * Time.deltaTime);
+        }
     }
 
     void MyInput()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
-        grounded = Physics.Raycast(transform.position, Vector3.down, jumpRayDistance, ground);
-        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        grounded = Grounded();
+        if (Input.GetKey(jumpKey) && canMove && readyToJump && grounded)
         {
             readyToJump = false;
             Jump();
-
             Invoke(nameof(resetJump), jumpCooldown);
         }
+        if (Input.GetKeyDown(attackKey) && canMove)
+        {
+            canMove = false;
+            AttackLogic();
+            Invoke(nameof(AttackCooldown), attackCooldown);
+        }
+        
     }
     void Jump()
     {
@@ -54,5 +70,24 @@ public class PlayerMovement : MonoBehaviour
     void resetJump()
     {
         readyToJump = true;
+    }
+    void AttackLogic()
+    {
+        if (Grounded())
+        {
+            Debug.Log("Ground attack");
+        }
+        else
+        {
+            Debug.Log("Air attack");
+        }
+    }
+    void AttackCooldown()
+    {
+        canMove = true;
+    }
+    bool Grounded()
+    {
+        return Physics.Raycast(transform.position, Vector3.down, jumpRayDistance, ground);
     }
 }
