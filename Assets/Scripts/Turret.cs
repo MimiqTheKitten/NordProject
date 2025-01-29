@@ -37,7 +37,7 @@ public class Turret : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawLine(transform.position, transform.forward, Color.red, maxviewDistance);
+        //Debug.DrawLine(transform.position, transform.forward, Color.red, maxviewDistance);
         switch (action) 
         {
             case "lookaround":
