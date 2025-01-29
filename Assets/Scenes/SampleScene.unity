@@ -769,9 +769,10 @@ MonoBehaviour:
   jumpRayDistance: 1.2
   jumpKey: 32
   attackCooldown: 1
+  airAttackCooldown: 0.3
   attackDmg: 1
+  canMove: 1
   attackKey: 304
-  playerHight: 1
   ground:
     serializedVersion: 2
     m_Bits: 8
@@ -812,10 +813,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 634208137}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24f2d7c06e5a7554cbc70e24edf0db1b, type: 3}
+  m_Script: {fileID: 11500000, guid: 0948a1121d9c6a34596cd316f18a888a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
+  hitBox: {fileID: 4558299938877076701, guid: e360d43db110aa544b227c5ad5d4f1c5, type: 3}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
