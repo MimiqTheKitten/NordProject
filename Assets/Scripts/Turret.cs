@@ -45,7 +45,7 @@ public class Turret : MonoBehaviour
                 break;
             case "lookat":
                 LookAt();
-                if (shouldFire)
+                if (shouldFire && Eyes())
                 {
                     shouldFire = false;
                     Invoke(nameof(Shoot), fireRate);
