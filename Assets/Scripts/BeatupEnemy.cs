@@ -6,9 +6,15 @@ public class BeatupEnemy : MonoBehaviour
     [SerializeField] string currentAction = "approach";
     [Header("Stats")]
     [SerializeField] float moveSpeed = 10;
+    [SerializeField] float maxViewDistance = 7;
+    [SerializeField] float engageDistance = 3;
+    float horizontalMove = -1;
+    Rigidbody rb;
+    [SerializeField] GameObject player;
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
+        player = GameObject.FindWithTag("Player");
     }
 
     // Update is called once per frame
@@ -19,7 +25,7 @@ public class BeatupEnemy : MonoBehaviour
             case "approach":
                 Approach();
                 break;
-            case "Engage":
+            case "engage":
                 Engage();
                 break;
             case "attack":
@@ -36,7 +42,13 @@ public class BeatupEnemy : MonoBehaviour
 
     void Approach()
     {
-
+        if (Distance().magnitude <= maxViewDistance)
+        {
+            Movement();
+        }if(Distance().magnitude <= engageDistance)
+        {
+            currentAction = "engage";
+        }
     }
 
     void Engage()
@@ -55,6 +67,10 @@ public class BeatupEnemy : MonoBehaviour
 
     void Movement()
     {
-
+        transform.Translate(Vector3.right * horizontalMove * moveSpeed * Time.deltaTime);
+    }
+    Vector3 Distance()
+    {
+        return (transform.position - player.transform.position);
     }
 }
