@@ -76,9 +76,12 @@ public class Turret : MonoBehaviour
     }
     void Shoot()
     {
+        
         GameObject bullet = Instantiate(this.bullet, shootPos.position,shootPos.rotation);
         bullet.GetComponent<Rigidbody>().linearVelocity = bullet.transform.forward * bulletSpeed;
         shouldFire = true;
+        bullet.GetComponent<AudioSource>().pitch = Random.Range(0.8f, 1.2f);
+        bullet.GetComponent<AudioSource>().Play();
         Destroy(bullet, bulletLife);
     }
     bool Eyes()
