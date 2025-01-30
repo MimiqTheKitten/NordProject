@@ -55,11 +55,11 @@ public class PlayerMovement : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         if (!(horizontalInput == 0))
         {
-            if (leftRight < 0 && horizontalInput > 0 && GameObject.Find("Swat").transform.rotation.eulerAngles.y > 260)
+            if (leftRight < 0 && horizontalInput > 0 && GameObject.Find("Swat").transform.rotation.eulerAngles.y > 279)
             {
                 anim_player.SetTrigger("180");
             }
-            else if(leftRight > 0 && horizontalInput < 0 && GameObject.Find("Swat").transform.rotation.eulerAngles.y < 95)
+            else if(leftRight > 0 && horizontalInput < 0 && GameObject.Find("Swat").transform.rotation.eulerAngles.y < 91)
             {
                 anim_player.SetTrigger("180");
             }
