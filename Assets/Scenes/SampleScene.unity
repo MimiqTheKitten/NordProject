@@ -853,7 +853,7 @@ MonoBehaviour:
   bullet: {fileID: 3813710490576848374, guid: 7c01e049ecfa44b4b9ac136204cdaa0b, type: 3}
   shootPos: {fileID: 843563507}
   fireRate: 0.2
-  bulletSpeed: 30
+  bulletSpeed: 20
   bulletLife: 2
   action: lookaround
   maxviewDistance: 100
