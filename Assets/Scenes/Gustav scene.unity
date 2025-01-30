@@ -881,6 +881,7 @@ GameObject:
   - component: {fileID: 1269716262}
   - component: {fileID: 1269716266}
   - component: {fileID: 1269716267}
+  - component: {fileID: 1269716268}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -1019,10 +1020,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAction: approach
-  moveSpeed: 4
   maxViewDistance: 7
   engageDistance: 3
+  attackDistance: 1.25
+  stuned: 0
+  stunTimer: 0
+  moveSpeed: 4
+  health: 100
+  horizontalMove: -1
   player: {fileID: 0}
+--- !u!114 &1269716268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269716261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0948a1121d9c6a34596cd316f18a888a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitBox: {fileID: 4558299938877076701, guid: e360d43db110aa544b227c5ad5d4f1c5, type: 3}
 --- !u!1 &1304545072
 GameObject:
   m_ObjectHideFlags: 0

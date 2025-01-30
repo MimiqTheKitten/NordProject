@@ -6,9 +6,9 @@ public class HitBox : MonoBehaviour
 
     public float lifeTime = 4;
 
-    bool hasntHit = true;
+    public bool hasntHit = true;
 
-    GameObject master;
+    public GameObject master;
 
     public void Setup(GameObject user,int damage,float lifetime, float scaleX = 1, float scaleY = 1)
     {

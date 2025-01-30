@@ -50,7 +50,7 @@ public class MoveListDoer : MonoBehaviour
             return;
         }
         isHitting = true;
-        StartCoroutine(LeftAirIE(0.3f));
+        StartCoroutine(LeftAirIE(0.15f));
     }
     public void RightAir()
     {
@@ -59,7 +59,7 @@ public class MoveListDoer : MonoBehaviour
             return;
         }
         isHitting = true;
-        StartCoroutine(RightAirIE(0.3f));
+        StartCoroutine(RightAirIE(0.15f));
     }
     IEnumerator LeftAirIE(float hitlag)
     {
@@ -75,8 +75,23 @@ public class MoveListDoer : MonoBehaviour
 
         isHitting = false;
     }
+    //Enemy attacks
+    public void EnemeyAttack(float offset = -0.8f)
+    {
+        if (isHitting)
+        {
+            return;
+        }
+        isHitting = true;
+        StartCoroutine(EnemyLeft(0.3f, offset));
+    }
+    IEnumerator EnemyLeft(float hitlag, float offset = 0)
+    {
+        HitBoxes(new Vector3(offset, -0.15f, 0), 10, .2f, 0.8f, 0.6f);
+        yield return new WaitForSeconds(hitlag);
 
-
+        isHitting = false;
+    }
     void HitBoxes(Vector3 hitboxOffset, int dmg, float lifeTime, float xScale = 1, float yScale = 1)
     {
         Vector3 pos = this.gameObject.transform.position + hitboxOffset;
