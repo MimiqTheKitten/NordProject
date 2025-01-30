@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8959999426579652348}
   - component: {fileID: 1604578854173987582}
   - component: {fileID: 6323721843726378937}
+  - component: {fileID: 501672052326839233}
   m_Layer: 7
   m_Name: Player 1
   m_TagString: Player
@@ -182,6 +183,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitBox: {fileID: 4558299938877076701, guid: e360d43db110aa544b227c5ad5d4f1c5, type: 3}
+--- !u!114 &501672052326839233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6787341549520275196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 330ed5ef99313014d9bcddcb7f14338b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 150
+  wc: {fileID: 0}
 --- !u!1 &8926611020969231801
 GameObject:
   m_ObjectHideFlags: 0

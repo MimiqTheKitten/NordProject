@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
@@ -17,8 +18,17 @@ public class Health : MonoBehaviour
         health -= damage;
         if(health <= 0)
         {
-            wc.Lose(gameObject);
-            gameObject.SetActive(false);
+            string scene = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene(scene);
+            //gameObject.SetActive(false);
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "bullet")
+        {
+            Damaged(50);
+            Destroy(collision.gameObject);
         }
     }
 }
