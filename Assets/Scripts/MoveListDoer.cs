@@ -30,14 +30,14 @@ public class MoveListDoer : MonoBehaviour
     }
     IEnumerator LeftNormalIE(float hitlag)
     {
-        HitBoxes(new Vector3(-1,0,0), 10, .4f,1.1f,0.8f);
+        HitBoxes(new Vector3(-0.8f,0,0), 10, .4f,1.1f,0.8f);
         yield return new WaitForSeconds(hitlag);
 
         isHitting = false;
     }
     IEnumerator RightNormalIE(float hitlag)
     {
-        HitBoxes(new Vector3(1, 0, 0), 10, .4f, 1.1f, 0.8f);
+        HitBoxes(new Vector3(0.8f, 0, 0), 10, .4f, 1.1f, 0.8f);
         yield return new WaitForSeconds(hitlag);
 
         isHitting = false;
@@ -63,14 +63,14 @@ public class MoveListDoer : MonoBehaviour
     }
     IEnumerator LeftAirIE(float hitlag)
     {
-        HitBoxes(new Vector3(-1, -0.8f, 0), 10, .4f, 1.1f, 0.8f);
+        HitBoxes(new Vector3(-0.8f, -0.8f, 0), 10, .4f, 1.1f, 0.8f);
         yield return new WaitForSeconds(hitlag);
 
         isHitting = false;
     }
     IEnumerator RightAirIE(float hitlag)
     {
-        HitBoxes(new Vector3(1, -0.8f, 0), 10, .4f, 1.1f, 0.8f);
+        HitBoxes(new Vector3(0.8f, -0.8f, 0), 10, .4f, 1.1f, 0.8f);
         yield return new WaitForSeconds(hitlag);
 
         isHitting = false;

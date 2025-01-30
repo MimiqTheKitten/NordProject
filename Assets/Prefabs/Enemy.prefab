@@ -155,7 +155,7 @@ MonoBehaviour:
   currentAction: approach
   maxViewDistance: 7
   engageDistance: 3
-  attackDistance: 1.25
+  attackDistance: 0.75
   stuned: 0
   stunTimer: 0
   moveSpeed: 4
