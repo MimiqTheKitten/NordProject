@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         MyInput();
-        if (canMove)
+        if (canMove && !anim_player.GetCurrentAnimatorStateInfo(0).IsName("turn_180"))
         {
             transform.Translate(Vector3.right * horizontalInput * moveSpeed * Time.deltaTime);
         }
@@ -54,8 +54,23 @@ public class PlayerMovement : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         if (!(horizontalInput == 0))
         {
+            if (leftRight < 0 && horizontalInput > 0)
+            {
+                anim_player.applyRootMotion = true;
+                anim_player.SetTrigger("180");
+            }
+            else if(leftRight > 0 && horizontalInput < 0)
+            {
+                anim_player.applyRootMotion = true;
+                anim_player.SetTrigger("180");
+            }
             leftRight = horizontalInput; //-1 is left, 1 is right
-            anim_player.SetBool("walking", true);
+            if (!anim_player.GetCurrentAnimatorStateInfo(0).IsName("turn_180"))
+            {
+                anim_player.applyRootMotion = false;
+                anim_player.SetBool("walking", true);
+            }
+            else anim_player.SetBool("walking", false);
         }
         else
         {
