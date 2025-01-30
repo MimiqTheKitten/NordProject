@@ -28,12 +28,15 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb;
     CharacterController cc;
+
+    Animator anim_player;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         cc = GetComponent<CharacterController>();
         moveList = GetComponent<MoveListDoer>();
+        anim_player = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -52,6 +55,11 @@ public class PlayerMovement : MonoBehaviour
         if (!(horizontalInput == 0))
         {
             leftRight = horizontalInput; //-1 is left, 1 is right
+            anim_player.SetBool("walking", true);
+        }
+        else
+        {
+            anim_player.SetBool("walking", false);
         }
         grounded = Grounded();
         if (Input.GetKey(jumpKey) && canMove && readyToJump && grounded)
@@ -87,12 +95,14 @@ public class PlayerMovement : MonoBehaviour
                 Debug.Log("Ground attack right");
                 moveList.RightNormal();
                 Invoke(nameof(AttackCooldown), attackCooldown);
+                anim_player.SetTrigger("attack");
             }
             else if(leftRight < 0) 
             {
                 Debug.Log("Ground attack left");
                 moveList.LeftNormal();
                 Invoke(nameof(AttackCooldown), attackCooldown);
+                anim_player.SetTrigger("attack");
             }
         }
         else
