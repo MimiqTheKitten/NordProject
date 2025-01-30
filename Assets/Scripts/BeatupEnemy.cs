@@ -107,6 +107,7 @@ public class BeatupEnemy : MonoBehaviour
         if(health <= 0)
         {
             gameObject.SetActive(false);
+            GameObject.Find("next level").SetActive(false);
         }
     }
 
